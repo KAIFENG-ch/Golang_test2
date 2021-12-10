@@ -51,7 +51,7 @@ func getComment() {
 			var i int64
 			for i = 1; i < length; i++ {
 				getMainComment(body, i)
-				commentPath := fmt.Sprintf("data.replies.%d.replies", i)
+				commentPath := fmt.Sprintf("data.replies.%d.replies.#", i)
 				childLength := gjson.Get(body, commentPath).Int()
 				var j int64
 				for j = 1; j < childLength; j++ {
@@ -60,8 +60,9 @@ func getComment() {
 			}
 		}
 		pg = pg + 1
+		time.Sleep(3*time.Second)
 	}
-	deleteDB()
+	//deleteDB()
 }
 
 var bili Comment
